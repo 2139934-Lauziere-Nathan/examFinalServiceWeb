@@ -17,43 +17,44 @@ const mod = {
             });
         });
     },
-    afficherDetail: (taskId) => {
-        return new Promise((resolve, reject) => {
-            const query = `
+   
+ afficherDetail : (taskId) => {
+    return new Promise((resolve, reject) => {
+        const query = `
             SELECT taches.titre, taches.description, taches.date_debut, sous_taches.titre AS sous_titre, sous_taches.complete AS sous_complete
             FROM public.taches
             INNER JOIN public.sous_taches ON taches.id = sous_taches.tache_id
             WHERE taches.id = $1;
-            `;
-            const values = [taskId];
-            db.query(query, values, (err, result) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    // Organize sub-tasks into an array
-                    const subTasks = [];
-                    result.rows.forEach(row => {
-                        if (row.sous_titre) {
-                            subTasks.push({
-                                titre: row.sous_titre,
-                                complete: row.sous_complete
-                            });
-                        }
-                    });
+        `;
+        const values = [taskId];
+        db.query(query, values, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                // Extract main task details
+                const taskDetails = {
+                    titre: result.rows[0].titre,
+                    description: result.rows[0].description,
+                    date_debut: result.rows[0].date_debut,
+                    sous_taches: []
+                };
 
-                    // Extract main task details
-                    const taskDetails = {
-                        titre: result.rows[0].titre,
-                        description: result.rows[0].description,
-                        date_debut: result.rows[0].date_debut,
-                        sous_taches: subTasks
-                    };
+                // Organize sub-tasks into an array
+                result.rows.forEach(row => {
+                    if (row.sous_titre) {
+                        taskDetails.sous_taches.push({
+                            titre: row.sous_titre,
+                            complete: row.sous_complete
+                        });
+                    }
+                });
 
-                    resolve(taskDetails);
-                }
-            });
+                resolve(taskDetails);
+            }
         });
-    },
+    });
+},
+
     ajouterTache: (utilisateurId, titre, description, dateDebut, dateEcheance) => {
         return new Promise((resolve, reject) => {
             const query = `
