@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();    
-const controller = require('../controlleur/controlleur').default;
+const controller = require('../controlleur/controlleur.js');
 
 
 //creation de la route pour tout afficher
