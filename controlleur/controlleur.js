@@ -19,8 +19,9 @@ getall: async (req, res) => {
 },
 afficherDetail: async (req, res) => {
     try {
-        const { taskId } = req.params;
-        const taskDetails = await TaskModel.afficherDetail(taskId);
+        const { taskId } = req.params.taskId;
+        console.log(taskId);
+        const taskDetails = await model.afficherDetail(taskId);
         res.json(taskDetails);
     } catch (error) {
         console.error("Error fetching task details:", error);
