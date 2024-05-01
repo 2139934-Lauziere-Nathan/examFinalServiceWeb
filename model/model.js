@@ -1,4 +1,4 @@
-const db = require("../.src/config/pg_db.js").default;
+const db = require(".../src/config/pg_db");
 
 
 const mod = {
@@ -12,7 +12,7 @@ const mod = {
                     reject(err);
                 } else {
                     console.log("resolve");
-                    resolve(result);
+                    resolve(result.rows);
                 }
             });
         });
