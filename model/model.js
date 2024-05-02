@@ -169,15 +169,15 @@ const mod = {
     }  ,
     
     
- 
- createUser:(nom, prenom, courriel, password) => {
+     createUser: async (nom, prenom, courriel, password) => {
         try {
             // Generate API key
-            let cle_api = uuidv4.v4();
-            cle_api = cle_api.substring(0,30);
+            let cle_api = uuidv4();
+            cle_api = cle_api.substring(0, 30);
+    
             // Hash the password
-            const hashedPassword = bcrypt.hash(password, 10);
-            // Insert user into the database
+            const hashedPassword = await bcrypt.hash(password, 10);
+    
             const query = `
                 INSERT INTO public.utilisateur (nom, prenom, courriel, cle_api, password)
                 VALUES ($1, $2, $3, $4, $5)
