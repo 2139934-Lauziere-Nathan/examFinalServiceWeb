@@ -18,42 +18,49 @@ const mod = {
         });
     },
    
- afficherDetail : (taskId) => {
-    return new Promise((resolve, reject) => {
-        const query = `
-            SELECT taches.titre, taches.description, taches.date_debut, sous_taches.titre AS sous_titre, sous_taches.complete AS sous_complete
-            FROM public.taches
-            INNER JOIN public.sous_taches ON taches.id = sous_taches.tache_id
-            WHERE taches.id = $1;
-        `;
-        const values = [taskId];
-        db.query(query, values, (err, result) => {
-            if (err) {
-                reject(err);
-            } else {
-                // Extract main task details
-                const taskDetails = {
-                    titre: result.rows[0].titre,
-                    description: result.rows[0].description,
-                    date_debut: result.rows[0].date_debut,
-                    sous_taches: []
-                };
-
-                // Organize sub-tasks into an array
-                result.rows.forEach(row => {
-                    if (row.sous_titre) {
-                        taskDetails.sous_taches.push({
-                            titre: row.sous_titre,
-                            complete: row.sous_complete
-                        });
+    afficherDetail: (taskId) => {
+        return new Promise((resolve, reject) => {
+            const query = `
+                SELECT taches.titre, taches.description, taches.date_debut, sous_taches.titre AS sous_titre, sous_taches.complete AS sous_complete
+                FROM public.taches
+                LEFT JOIN public.sous_taches ON taches.id = sous_taches.tache_id
+                WHERE taches.id = $1;
+            `;
+            const values = [taskId];
+            db.query(query, values, (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    if (result.rows.length === 0) {
+                        // If no task found, resolve with null or appropriate message
+                        resolve(null);
+                        return;
                     }
-                });
-
-                resolve(taskDetails);
-            }
+    
+                    // Extract main task details
+                    const mainTask = result.rows[0];
+                    const taskDetails = {
+                        titre: mainTask.titre,
+                        description: mainTask.description,
+                        date_debut: mainTask.date_debut,
+                        sous_taches: []
+                    };
+    
+                    // Organize sub-tasks into an array
+                    result.rows.forEach(row => {
+                        if (row.sous_titre) {
+                            taskDetails.sous_taches.push({
+                                titre: row.sous_titre,
+                                complete: row.sous_complete
+                            });
+                        }
+                    });
+    
+                    resolve(taskDetails);
+                }
+            });
         });
-    });
-},
+    },
 
     ajouterTache: (utilisateurId, titre, description, dateDebut, dateEcheance) => {
         return new Promise((resolve, reject) => {
