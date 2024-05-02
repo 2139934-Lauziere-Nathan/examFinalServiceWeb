@@ -168,7 +168,8 @@ const mod = {
         });
     }  ,
     
-     generateAPIKey() {
+    
+    generateAPIKey:() =>{
         // Generate a random string
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let apiKey = '';
