@@ -166,6 +166,41 @@ const mod = {
                 }
             });
         });
-    }  
+    }  ,
+    
+     generateAPIKey() {
+        // Generate a random string
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let apiKey = '';
+        const keyLength = 32; // You can adjust the length of the API key as needed
+    
+        for (let i = 0; i < keyLength; i++) {
+            apiKey += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+    
+        return apiKey;
+    },
+ createUser:(nom, prenom, courriel, password) => {
+        try {
+            // Generate API key
+            const cle_api = mod.generateAPIKey();
+    
+            // Hash the password
+            const hashedPassword = bcrypt.hash(password, 10);
+    
+            // Insert user into the database
+            const query = `
+                INSERT INTO public.utilisateur (nom, prenom, courriel, cle_api, password)
+                VALUES ($1, $2, $3, $4, $5)
+                RETURNING *;
+            `;
+            const values = [nom, prenom, courriel, cle_api, hashedPassword];
+            const result = db.query(query, values);
+    
+            return result.rows[0]; // Return the newly created user
+        } catch (error) {
+            throw error;
+        }
+    }    
 };
 module.exports = mod;
