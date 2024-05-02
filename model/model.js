@@ -169,22 +169,11 @@ const mod = {
     }  ,
     
     
-    generateAPIKey:() =>{
-        // Generate a random string
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let apiKey = '';
-        const keyLength = 32; // You can adjust the length of the API key as needed
-    
-        for (let i = 0; i < keyLength; i++) {
-            apiKey += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-    
-        return apiKey;
-    },
+ 
  createUser:(nom, prenom, courriel, password) => {
         try {
             // Generate API key
-            const cle_api = mod.generateAPIKey();
+            const cle_api = uuidv4.v4();
     
             // Hash the password
             const hashedPassword = bcrypt.hash(password, 10);
