@@ -19,7 +19,7 @@ getall: async (req, res) => {
 },
 afficherDetail: async (req, res) => {
     try {
-        const { taskId } = req.params.taskId;
+        const taskId  = req.params.taskId;
         console.log(taskId);
         const taskDetails = await model.afficherDetail(taskId);
         res.json(taskDetails);
