@@ -1,6 +1,6 @@
 const db = require("../src/config/pg_db");
 const uuidv4 = require('uuid');
-
+const bcrypt = require('bcrypt');
 const mod = {
     getAll: (id) => {
         console.log(id);
@@ -177,7 +177,7 @@ const mod = {
     
             // Hash the password
             const hashedPassword = bcrypt.hash(password, 10);
-    
+            
             // Insert user into the database
             const query = `
                 INSERT INTO public.utilisateur (nom, prenom, courriel, cle_api, password)

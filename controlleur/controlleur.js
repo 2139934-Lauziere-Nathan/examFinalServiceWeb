@@ -5,14 +5,10 @@ const controlleur = {
         try {
             const { nom, prenom, courriel, password } = req.body;
     
-            // Generate API key
-            const cle_api = model.genAPIKey();
             
-            // Hash the password
-            const hashedPassword = await bcrypt.hash(password, 10);
-    
+            
             // Create user using the model
-            const newUser = await model.createUser(nom, prenom, courriel, hashedPassword, cle_api);
+            const newUser = await model.createUser(nom, prenom, courriel, password );
     
             // Return the newly created user
             res.status(201).json(newUser);
