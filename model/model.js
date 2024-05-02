@@ -33,6 +33,7 @@ const mod = {
                     reject(err);
                 } else {
                     if (result.rows.length === 0) {
+                        console.log("erreur model")
                         // If no task found, resolve with null or appropriate message
                         resolve(null);
                         return;
