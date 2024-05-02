@@ -27,6 +27,7 @@ const mod = {
                 WHERE taches.id = $1;
             `;
             const values = [taskId];
+            console.log(values);
             db.query(query, values, (err, result) => {
                 if (err) {
                     reject(err);
