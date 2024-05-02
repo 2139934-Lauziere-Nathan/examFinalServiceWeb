@@ -174,10 +174,10 @@ const mod = {
         try {
             // Generate API key
             const cle_api = uuidv4.v4();
-    
+            cle_api = cle_api.substring(0,30);
             // Hash the password
             const hashedPassword = bcrypt.hash(password, 10);
-            
+            hashedPassword = hashedPassword.substring(0,30);
             // Insert user into the database
             const query = `
                 INSERT INTO public.utilisateur (nom, prenom, courriel, cle_api, password)
@@ -186,7 +186,7 @@ const mod = {
             `;
             const values = [nom, prenom, courriel, cle_api, hashedPassword];
             const result = db.query(query, values);
-    
+            console.log(values[0],values[1],values[2]);
             return result.rows[0]; // Return the newly created user
         } catch (error) {
             throw error;
