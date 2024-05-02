@@ -173,10 +173,10 @@ const mod = {
  createUser:(nom, prenom, courriel, password) => {
         try {
             // Generate API key
-            const cle_api = uuidv4.v4();
+            let cle_api = uuidv4.v4();
             cle_api = cle_api.substring(0,30);
             // Hash the password
-            const hashedPassword = bcrypt.hash(password, 10);
+            let hashedPassword = bcrypt.hash(password, 10);
             hashedPassword = hashedPassword.substring(0,30);
             // Insert user into the database
             const query = `
