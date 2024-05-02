@@ -59,6 +59,38 @@ afficherDetail: async (req, res) => {
             console.error("Error deleting task:", error);
             res.status(500).json({ error: "Error deleting task" });
         }
+    },
+    ajouterSousTache: async (req, res) => {
+        try {
+            const { tacheId, titre, complete } = req.body;
+            const newSubTask = await model.ajouterSousTache(tacheId, titre, complete);
+            res.status(201).json(newSubTask);
+        } catch (error) {
+            console.error("Error adding sub-task:", error);
+            res.status(500).json({ error: "Error adding sub-task" });
+        }
+    },
+    
+    modifierSousTache: async (req, res) => {
+        try {
+            const { sousTacheId, titre, complete } = req.body;
+            const modifiedSubTask = await model.modifierSousTache(sousTacheId, titre, complete);
+            res.json(modifiedSubTask);
+        } catch (error) {
+            console.error("Error modifying sub-task:", error);
+            res.status(500).json({ error: "Error modifying sub-task" });
+        }
+    },
+    
+    supprimerSousTache: async (req, res) => {
+        try {
+            const { sousTacheId } = req.params;
+            const deletedSubTask = await model.supprimerSousTache(sousTacheId);
+            res.json(deletedSubTask);
+        } catch (error) {
+            console.error("Error deleting sub-task:", error);
+            res.status(500).json({ error: "Error deleting sub-task" });
+        }
     }
 };
 

@@ -23,7 +23,7 @@ const mod = {
             const query = `
                 SELECT taches.titre, taches.description, taches.date_debut, sous_taches.titre AS sous_titre, sous_taches.complete AS sous_complete
                 FROM public.taches
-                LEFT JOIN public.sous_taches ON taches.id = sous_taches.tache_id
+                INNER JOIN public.sous_taches ON taches.id = sous_taches.tache_id
                 WHERE taches.id = $1;
             `;
             const values = [taskId];
@@ -112,6 +112,60 @@ const mod = {
                 }
             });
         });
-    }    
+    },
+    ajouterSousTache: (tacheId, titre, complete) => {
+        return new Promise((resolve, reject) => {
+            const query = `
+                INSERT INTO public.sous_taches (tache_id, titre, complete)
+                VALUES ($1, $2, $3)
+                RETURNING *;
+            `;
+            const values = [tacheId, titre, complete];
+            db.query(query, values, (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.rows[0]);
+                }
+            });
+        });
+    },
+    
+    modifierSousTache: (sousTacheId, titre, complete) => {
+        return new Promise((resolve, reject) => {
+            const query = `
+                UPDATE public.sous_taches 
+                SET titre = $2, complete = $3
+                WHERE id = $1
+                RETURNING *;
+            `;
+            const values = [sousTacheId, titre, complete];
+            db.query(query, values, (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.rows[0]);
+                }
+            });
+        });
+    },
+    
+    supprimerSousTache: (sousTacheId) => {
+        return new Promise((resolve, reject) => {
+            const query = `
+                DELETE FROM public.sous_taches
+                WHERE id = $1
+                RETURNING *;
+            `;
+            const values = [sousTacheId];
+            db.query(query, values, (err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.rows[0]);
+                }
+            });
+        });
+    }  
 };
 module.exports = mod;
