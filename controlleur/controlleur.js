@@ -1,6 +1,26 @@
 const model = require('../model/model.js');
 
 const controlleur = {
+     createUser: async (req, res) => {
+        try {
+            const { nom, prenom, courriel, password } = req.body;
+    
+            // Generate API key
+            const cle_api = model.genAPIKey();
+            
+            // Hash the password
+            const hashedPassword = await bcrypt.hash(password, 10);
+    
+            // Create user using the model
+            const newUser = await model.createUser(nom, prenom, courriel, hashedPassword, cle_api);
+    
+            // Return the newly created user
+            res.status(201).json(newUser);
+        } catch (error) {
+            console.error("Error creating user:", error);
+            res.status(500).json({ error: "An error occurred while creating the user." });
+        }
+    },
 getall: async (req, res) => {
     console.log("controlleur pass");
     const auteur_id = req.params.id;

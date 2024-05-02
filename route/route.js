@@ -24,5 +24,5 @@ router.put('/tasks/subtasks/:sousTacheId', controller.modifierSousTache);
 
 // Route for deleting a sub-task
 router.delete('/tasks/subtasks/:sousTacheId', controller.supprimerSousTache);
-
+router.post('/users', controller.createUser);
 module.exports = router;
