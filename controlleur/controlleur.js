@@ -18,12 +18,12 @@ const controlleur = {
         }
     },
     
-const updateUser = async (req, res, next) => {
+ updateUser: async (req, res) => {
     try {
         const userId = req.params.userId; // Assuming userId is passed as a parameter in the request
         
         // Call the updateUser function from the model
-        const updatedUser = await userModel.updateUser(userId);
+        const updatedUser = await model.updateUser(userId);
 
         res.status(200).json({
             success: true,

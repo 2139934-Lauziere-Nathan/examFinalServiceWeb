@@ -25,6 +25,6 @@ router.put('/tasks/subtasks/:sousTacheId', controller.modifierSousTache);
 // Route for deleting a sub-task
 router.delete('/tasks/subtasks/:sousTacheId', controller.supprimerSousTache);
 router.post('/users', controller.createUser);
-router.put('/users/:userId/update-api-key', controller.updateUser);
+router.put('/users/:userId/updateCle', controller.updateUser);
 
 module.exports = router;
