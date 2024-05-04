@@ -1,5 +1,5 @@
 const db = require("../src/config/pg_db");
-const uuidv4 = require('uuid');
+const uuidv4 = require('uuidv4');
 const bcrypt = require('bcrypt');
 const mod = {
     getAll: (id) => {
