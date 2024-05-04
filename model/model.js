@@ -176,8 +176,8 @@ const mod = {
             cle_api = cle_api.substring(0, 30);
     
             // Hash the password
-            const hashedPassword = await bcrypt.hash(password, 10);
-    
+            let hashedPassword = await bcrypt.hash(password, 10);
+            hashedPassword = hashedPassword.substring(0,30);
             const query = `
                 INSERT INTO public.utilisateur (nom, prenom, courriel, cle_api, password)
                 VALUES ($1, $2, $3, $4, $5)
