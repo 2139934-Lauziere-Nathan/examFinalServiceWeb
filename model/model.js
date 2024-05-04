@@ -186,7 +186,7 @@ const mod = {
             const values = [nom, prenom, courriel, cle_api, hashedPassword];
             const result = db.query(query, values);
             console.log(values[0],values[1],values[2], values[3], values[4]);
-            return result.rows[0]; // Return the newly created user
+            return result; // Return the newly created user
         } catch (error) {
             throw error;
         }
