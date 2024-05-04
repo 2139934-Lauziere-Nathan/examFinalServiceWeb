@@ -17,6 +17,28 @@ const controlleur = {
             res.status(500).json({ error: "An error occurred while creating the user." });
         }
     },
+    
+const updateUser = async (req, res, next) => {
+    try {
+        const userId = req.params.userId; // Assuming userId is passed as a parameter in the request
+        
+        // Call the updateUser function from the model
+        const updatedUser = await userModel.updateUser(userId);
+
+        res.status(200).json({
+            success: true,
+            message: 'User API key updated successfully',
+            user: updatedUser
+        });
+    } catch (error) {
+        console.error('Error updating user API key:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to update user API key'
+        });
+    }
+},
+
 getall: async (req, res) => {
     console.log("controlleur pass");
     const auteur_id = req.params.id;

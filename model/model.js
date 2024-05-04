@@ -186,7 +186,26 @@ const mod = {
             const values = [nom, prenom, courriel, cle_api, hashedPassword];
             const result = db.query(query, values);
             console.log(values[0],values[1],values[2], values[3], values[4]);
-            return result; // Return the newly created user
+            return result.cle_api; // Return the newly created user
+        } catch (error) {
+            throw error;
+        }
+    },
+    updateUser: async (userId) => {
+        try {
+            // Generate a new API key
+            let newCleApi = uuidv4.v4();
+            newCleApi = newCleApi.substring(0, 30);
+    
+            const query = `
+                UPDATE public.utilisateur 
+                SET cle_api = $1
+                WHERE id = $2
+                RETURNING *;
+            `;
+            const values = [newCleApi, userId];
+            const result = await db.query(query, values);
+            return result.rows[0]; // Return the updated user
         } catch (error) {
             throw error;
         }
