@@ -1,5 +1,5 @@
 const db = require("../src/config/pg_db");
-const uuidv4 = require('uuidv4');
+const uuidv4 = require('uuid');
 const bcrypt = require('bcrypt');
 const mod = {
     getAll: (id) => {
@@ -172,7 +172,7 @@ const mod = {
      createUser: async (nom, prenom, courriel, password) => {
         try {
             // Generate API key
-            let cle_api = uuidv4();
+            let cle_api = uuidv4.v4();
             cle_api = cle_api.substring(0, 30);
     
             // Hash the password
