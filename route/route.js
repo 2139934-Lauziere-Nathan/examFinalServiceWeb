@@ -4,7 +4,7 @@ const controller = require('../controlleur/controlleur.js');
 
 
 //creation de la route pour tout afficher
-router.get('/tous/:id', controller.getall);
+router.get('/tous/:id', controller.getAll);
 router.get('/taskDetails/:taskId', controller.afficherDetail);
 
 // Route for adding a task
