@@ -83,7 +83,15 @@ getall: async (req, res) => {
     }
 }*/,
 afficherDetail: async (req, res) => {
+    const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    
     try {
+        // Verify the cle_api
+        const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+        
+        if (!isCleApiValid) {
+            return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+        }
         const taskId  = req.params.taskId;
         console.log(taskId);
         const taskDetails = await model.afficherDetail(taskId);
@@ -94,7 +102,15 @@ afficherDetail: async (req, res) => {
     }
 },
     ajouterTache: async (req, res) => {
+        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    
         try {
+            // Verify the cle_api
+            const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+            
+            if (!isCleApiValid) {
+                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            }
             const { utilisateurId, titre, description, dateDebut, dateEcheance } = req.body;
             const newTask = await model.ajouterTache(utilisateurId, titre, description, dateDebut, dateEcheance);
             res.status(201).json(newTask);
@@ -105,7 +121,15 @@ afficherDetail: async (req, res) => {
     },
 
     modifierTache: async (req, res) => {
+        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    
         try {
+            // Verify the cle_api
+            const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+            
+            if (!isCleApiValid) {
+                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            }
             const { tacheId, titre, description, dateDebut, dateEcheance } = req.body;
             const modifiedTask = await model.modifierTache(tacheId, titre, description, dateDebut, dateEcheance);
             res.json(modifiedTask);
@@ -116,7 +140,15 @@ afficherDetail: async (req, res) => {
     },
 
     supprimerTache: async (req, res) => {
+        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    
         try {
+            // Verify the cle_api
+            const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+            
+            if (!isCleApiValid) {
+                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            }
             const { tacheId } = req.params;
             const deletedTask = await model.supprimerTache(tacheId);
             res.json(deletedTask);
@@ -126,7 +158,15 @@ afficherDetail: async (req, res) => {
         }
     },
     ajouterSousTache: async (req, res) => {
+        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    
         try {
+            // Verify the cle_api
+            const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+            
+            if (!isCleApiValid) {
+                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            }
             const { tacheId, titre, complete } = req.body;
             const newSubTask = await model.ajouterSousTache(tacheId, titre, complete);
             res.status(201).json(newSubTask);
@@ -137,7 +177,15 @@ afficherDetail: async (req, res) => {
     },
     
     modifierSousTache: async (req, res) => {
+        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    
         try {
+            // Verify the cle_api
+            const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+            
+            if (!isCleApiValid) {
+                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            }
             const { sousTacheId, titre, complete } = req.body;
             const modifiedSubTask = await model.modifierSousTache(sousTacheId, titre, complete);
             res.json(modifiedSubTask);
@@ -148,7 +196,15 @@ afficherDetail: async (req, res) => {
     },
     
     supprimerSousTache: async (req, res) => {
+        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    
         try {
+            // Verify the cle_api
+            const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+            
+            if (!isCleApiValid) {
+                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            }
             const { sousTacheId } = req.params;
             const deletedSubTask = await model.supprimerSousTache(sousTacheId);
             res.json(deletedSubTask);
