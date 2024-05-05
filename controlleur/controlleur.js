@@ -38,7 +38,34 @@ const controlleur = {
         });
     }
 },
+getAll: async (req, res) => {
+    console.log("controlleur pass");
+    const userId = req.params.id;
+    const cleApi = req.headers['cle-api']; // Assuming the cle_api is passed in the headers
+    
+    try {
+        // Verify the cle_api
+        const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+        
+        if (!isCleApiValid) {
+            return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+        }
+        
+        // If cle_api is valid, proceed to fetch tasks
+        const tasks = await model.getAll(userId);
+        
+        if (!tasks) {
+            res.status(404).json({ error: `Utilisateur avec l'ID ${userId} introuvable` });
+        } else {
+            res.json(tasks);
+        }
+    } catch (error) {
+        console.error(`Erreur lors de la récupération des tâches pour l'utilisateur avec l'ID ${userId}:`, error);
+        res.status(500).json({ error: 'Erreur serveur interne' });
+    }
+}
 
+/*
 getall: async (req, res) => {
     console.log("controlleur pass");
     const auteur_id = req.params.id;
@@ -54,7 +81,7 @@ getall: async (req, res) => {
         console.error(`Error fetching tache with ID ${auteur_id}:`, error);
         res.status(500).json({ error: 'erreur serveur interne' });
     }
-},
+}*/,
 afficherDetail: async (req, res) => {
     try {
         const taskId  = req.params.taskId;

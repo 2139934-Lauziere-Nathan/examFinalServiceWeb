@@ -209,6 +209,19 @@ const mod = {
         } catch (error) {
             throw error;
         }
-    }    
+    } ,
+    verifyCleApi: async (userId, cleApi) => {
+        try {
+            const query = `
+                SELECT id FROM public.utilisateur
+                WHERE id = $1 AND cle_api = $2;
+            `;
+            const values = [userId, cleApi];
+            const result = await db.query(query, values);
+            return result.rows.length > 0; // If there's a match, return true; otherwise, return false
+        } catch (error) {
+            throw error;
+        }
+    }   
 };
 module.exports = mod;
