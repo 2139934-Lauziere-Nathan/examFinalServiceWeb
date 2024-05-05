@@ -41,7 +41,7 @@ const controlleur = {
 getAll: async (req, res) => {
     console.log("controlleur pass");
     const userId = req.params.id;
-    const cleApi = req.headers['cle-api']; // Assuming the cle_api is passed in the headers
+    const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
     
     try {
         // Verify the cle_api
