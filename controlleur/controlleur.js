@@ -21,6 +21,12 @@ const controlleur = {
  updateUser: async (req, res) => {
     try {
         const userId = req.params.userId; // Assuming userId is passed as a parameter in the request
+        const password = req.headers['password'];
+        const isValidPassword = await model.verifyCode(userId, password);
+        
+        if (!isValidPassword) {
+            return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+        }
         
         // Call the updateUser function from the model
         const updatedUser = await model.updateUser(userId);
@@ -64,24 +70,7 @@ getAll: async (req, res) => {
         res.status(500).json({ error: 'Erreur serveur interne' });
     }
 }
-
-/*
-getall: async (req, res) => {
-    console.log("controlleur pass");
-    const auteur_id = req.params.id;
-    console.log(auteur_id);
-    try {
-        const tache = await model.getAll(auteur_id);
-        if (!tache) {
-            res.status(404).json({ error: `auteur: ${auteur_id} introuvable` });
-        } else {
-            res.json(tache);
-        }
-    } catch (error) {
-        console.error(`Error fetching tache with ID ${auteur_id}:`, error);
-        res.status(500).json({ error: 'erreur serveur interne' });
-    }
-}*/,
+,
 afficherDetail: async (req, res) => {
     const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
     
