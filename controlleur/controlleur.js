@@ -28,7 +28,7 @@ const controlleur = {
             return res.status(401).json({ error: 'Unauthorized: Invalid password' });
         }
         
-        // Call the updateUser function from the model
+      
         const updatedUser = await model.updateUser(userId);
 
         res.status(200).json({
