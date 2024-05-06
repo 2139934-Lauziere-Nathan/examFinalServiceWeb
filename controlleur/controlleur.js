@@ -3,14 +3,14 @@ const model = require('../model/model.js');
 const controlleur = {
      createUser: async (req, res) => {
         try {
-            const { nom, prenom, courriel, password } = req.body;
+            const {courriel, password } = req.body;
     
             
             
-            // Create user using the model
-            const newUser = await model.createUser(nom, prenom, courriel, password );
+           
+            const newUser = await model.createUser(courriel, password );
     
-            // Return the newly created user
+            
             res.status(201).json(newUser);
         } catch (error) {
             console.error("Error creating user:", error);
@@ -20,12 +20,12 @@ const controlleur = {
     
  updateUser: async (req, res) => {
     try {
-        const userId = req.params.userId; // Assuming userId is passed as a parameter in the request
+        const userId = req.params.userId; 
         const password = req.headers['password'];
         const isValidPassword = await model.verifyCode(userId, password);
         
         if (!isValidPassword) {
-            return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            return res.status(401).json({ error: 'Unauthorized: Invalid password' });
         }
         
         // Call the updateUser function from the model
@@ -47,17 +47,17 @@ const controlleur = {
 getAll: async (req, res) => {
     console.log("controlleur pass");
     const userId = req.params.id;
-    const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    const cleApi = req.headers['cle_api'];
     
     try {
-        // Verify the cle_api
+
         const isCleApiValid = await model.verifyCleApi(userId, cleApi);
         
         if (!isCleApiValid) {
             return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
         }
         
-        // If cle_api is valid, proceed to fetch tasks
+      
         const tasks = await model.getAll(userId);
         
         if (!tasks) {
@@ -72,7 +72,7 @@ getAll: async (req, res) => {
 }
 ,
 afficherDetail: async (req, res) => {
-    const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+    const cleApi = req.headers['cle_api']; 
     
     try {
         // Verify the cle_api
@@ -91,10 +91,9 @@ afficherDetail: async (req, res) => {
     }
 },
     ajouterTache: async (req, res) => {
-        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
-    
+        const cleApi = req.headers['cle_api'];
         try {
-            // Verify the cle_api
+         
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
@@ -110,10 +109,10 @@ afficherDetail: async (req, res) => {
     },
 
     modifierTache: async (req, res) => {
-        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+        const cleApi = req.headers['cle_api']; 
     
         try {
-            // Verify the cle_api
+          
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
@@ -129,10 +128,10 @@ afficherDetail: async (req, res) => {
     },
 
     supprimerTache: async (req, res) => {
-        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
+        const cleApi = req.headers['cle_api']; 
     
         try {
-            // Verify the cle_api
+         
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
@@ -147,10 +146,9 @@ afficherDetail: async (req, res) => {
         }
     },
     ajouterSousTache: async (req, res) => {
-        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
-    
+        const cleApi = req.headers['cle_api']; 
         try {
-            // Verify the cle_api
+         
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
@@ -166,10 +164,9 @@ afficherDetail: async (req, res) => {
     },
     
     modifierSousTache: async (req, res) => {
-        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
-    
+        const cleApi = req.headers['cle_api']; 
         try {
-            // Verify the cle_api
+          
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
@@ -185,10 +182,9 @@ afficherDetail: async (req, res) => {
     },
     
     supprimerSousTache: async (req, res) => {
-        const cleApi = req.headers['cle_api']; // Assuming the cle_api is passed in the headers
-    
+        const cleApi = req.headers['cle_api']; 
         try {
-            // Verify the cle_api
+       
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {

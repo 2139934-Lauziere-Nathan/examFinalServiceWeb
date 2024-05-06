@@ -34,12 +34,11 @@ const mod = {
                 } else {
                     if (result.rows.length === 0) {
                         console.log("erreur model", values)
-                        // If no task found, resolve with null or appropriate message
                         resolve(null);
                         return;
                     }
     
-                    // Extract main task details
+                   
                     const mainTask = result.rows[0];
                     const taskDetails = {
                         titre: mainTask.titre,
@@ -48,7 +47,7 @@ const mod = {
                         sous_taches: []
                     };
     
-                    // Organize sub-tasks into an array
+                   
                     result.rows.forEach(row => {
                         if (row.sous_titre) {
                             taskDetails.sous_taches.push({
@@ -169,31 +168,30 @@ const mod = {
     }  ,
     
     
-     createUser: async (nom, prenom, courriel, password) => {
+     createUser: async (courriel, password) => {
         try {
-            // Generate API key
+           
             let cle_api = uuidv4.v4();
             cle_api = cle_api.substring(0, 30);
     
-            // Hash the password
+          
             let hashedPassword = await bcrypt.hash(password, 10);
             hashedPassword = hashedPassword.substring(0,30);
             const query = `
-                INSERT INTO public.utilisateur (nom, prenom, courriel, cle_api, password)
-                VALUES ($1, $2, $3, $4, $5)
+                INSERT INTO public.utilisateur (courriel, cle_api, password)
+                VALUES ($1, $2, $3)
                 RETURNING *;
             `;
-            const values = [nom, prenom, courriel, cle_api, hashedPassword];
+            const values = [courriel, cle_api, hashedPassword];
             const result = db.query(query, values);
-            console.log(values[0],values[1],values[2], values[3], values[4]);
-            return result.cle_api; // Return the newly created user
+            console.log(values[0],values[1],values[2]);
+            return result.cle_api; 
         } catch (error) {
             throw error;
         }
     },
     updateUser: async (userId) => {
         try {
-            // Generate a new API key
             let newCleApi = uuidv4.v4();
             newCleApi = newCleApi.substring(0, 30);
     
@@ -205,7 +203,7 @@ const mod = {
             `;
             const values = [newCleApi, userId];
             const result = await db.query(query, values);
-            return result.rows[0]; // Return the updated user
+            return result.rows[0];
         } catch (error) {
             throw error;
         }
@@ -218,7 +216,7 @@ const mod = {
             `;
             const values = [userId, cleApi];
             const result = await db.query(query, values);
-            return result.rows.length > 0; // If there's a match, return true; otherwise, return false
+            return result.rows.length > 0; 
         } catch (error) {
             throw error;
         }
@@ -233,7 +231,7 @@ const mod = {
             `;
             const values = [userId, hashedPassword];
             const result = await db.query(query, values);
-            return result.rows.length > 0; // If there's a match, return true; otherwise, return false
+            return result.rows.length > 0; 
         } catch (error) {
             throw error;
         }
