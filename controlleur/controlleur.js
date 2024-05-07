@@ -8,7 +8,8 @@ const controlleur = {
     
             
             
-           
+            console.log(courriel);
+            console.log(password);
             const newUser = await model.createUser(courriel, password );
     
             
