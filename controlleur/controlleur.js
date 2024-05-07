@@ -13,6 +13,7 @@ const controlleur = {
             
             res.status(201).json(newUser);
         } catch (error) {
+            console.log(password);
             console.error("Error creating user:", error);
             res.status(500).json({ error: "An error occurred while creating the user." });
         }
