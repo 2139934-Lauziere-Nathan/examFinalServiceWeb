@@ -174,7 +174,7 @@ const mod = {
             let cle_api = uuidv4.v4();
             cle_api = cle_api.substring(0, 30);
     
-          
+            console.log("P",password);
             let hashedPassword = await bcrypt.hash(password, 10);
             hashedPassword = hashedPassword.substring(0,30);
             const query = `
