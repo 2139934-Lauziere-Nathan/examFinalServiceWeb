@@ -2,6 +2,12 @@ const express = require('express');
 
 const app = express();
 const PORT = 3000;
+// Dans votre fichier de démarrage
+const cors = require('cors');
+
+// Déclaration des middlewares
+app.use(cors());
+
 app.use(express.json());
 /*
 app.get('/', (req, res) => {
