@@ -3,8 +3,8 @@ const model = require('../model/model.js');
 const controlleur = {
      createUser: async (req, res) => {
         try {
-            const courriel = req.params.courriel;
-            const password = req.params.password;
+            const courriel = req.body.courriel;
+            const password = req.body.password;
     
             
             
