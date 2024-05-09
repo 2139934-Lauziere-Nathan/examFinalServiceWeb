@@ -18,7 +18,7 @@ const mod = {
         });
     },
    
-    afficherDetail: (userId, taskId) => {
+    afficherDetail: (taskId) => {
         return new Promise((resolve, reject) => {
             const query = `
                 SELECT taches.titre, taches.description, taches.date_debut, sous_taches.titre AS sous_titre, sous_taches.complete AS sous_complete
@@ -86,7 +86,8 @@ const mod = {
             const query = `
                 UPDATE public.taches 
                 SET titre = $2, description = $3, date_debut = $4, date_echeance = $5
-                WHERE id = $1;
+                WHERE id = $1
+                RETURNING *;
             `;
             const values = [tacheId, titre, description, dateDebut, dateEcheance];
             db.query(query, values, (err, result) => {
