@@ -81,7 +81,8 @@ afficherDetail: async (req, res) => {
     try {
         // Verify the cle_api
         const isCleApiValid = await model.verifyCleApi(Id, cleApi);
-        
+        console.log(Id);
+        console.log(cleApi);
         if (!isCleApiValid) {
             return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
         }
