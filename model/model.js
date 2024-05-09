@@ -18,7 +18,7 @@ const mod = {
         });
     },
    
-    afficherDetail: (taskId) => {
+    afficherDetail: (userId, taskId) => {
         return new Promise((resolve, reject) => {
             const query = `
                 SELECT taches.titre, taches.description, taches.date_debut, sous_taches.titre AS sous_titre, sous_taches.complete AS sous_complete

@@ -77,10 +77,10 @@ getAll: async (req, res) => {
 ,
 afficherDetail: async (req, res) => {
     const cleApi = req.headers['cle_api']; 
-    
+    const Id = req.params.userId
     try {
         // Verify the cle_api
-        const isCleApiValid = await model.verifyCleApi(userId, cleApi);
+        const isCleApiValid = await model.verifyCleApi(Id, cleApi);
         
         if (!isCleApiValid) {
             return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });

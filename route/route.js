@@ -14,7 +14,7 @@ router.post('/addTask', controller.ajouterTache);
 router.put('/updateTask/:tacheId', controller.modifierTache);
 
 // Route for deleting a task
-router.delete('/deleteTask/:tacheId', controller.supprimerTache);
+router.delete('/deleteTask/:userId/:tacheId', controller.supprimerTache);
 
 // Route for adding a sub-task
 router.post('/tasks/:tacheId/subtasks', controller.ajouterSousTache);
