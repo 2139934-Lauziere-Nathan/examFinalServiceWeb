@@ -5,7 +5,7 @@ const controller = require('../controlleur/controlleur.js');
 
 //creation de la route pour tout afficher
 router.get('/tous/:id', controller.getAll);
-router.get('/taskDetails/:taskId', controller.afficherDetail);
+router.get('/taskDetails/:userId/:taskId', controller.afficherDetail);
 
 // Route for adding a task
 router.post('/addTask', controller.ajouterTache);
@@ -14,7 +14,7 @@ router.post('/addTask', controller.ajouterTache);
 router.put('/updateTask/:tacheId', controller.modifierTache);
 
 // Route for deleting a task
-router.delete('/deleteTask/:userId/:tacheId', controller.supprimerTache);
+router.delete('/deleteTask/:tacheId', controller.supprimerTache);
 
 // Route for adding a sub-task
 router.post('/tasks/:tacheId/subtasks', controller.ajouterSousTache);
