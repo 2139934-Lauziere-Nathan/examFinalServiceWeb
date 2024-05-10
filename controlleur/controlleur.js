@@ -97,6 +97,7 @@ afficherDetail: async (req, res) => {
 },
     ajouterTache: async (req, res) => {
         const cleApi = req.headers['cle_api'];
+        const userId = req.params.Id;
         try {
          
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
@@ -115,6 +116,7 @@ afficherDetail: async (req, res) => {
 
     modifierTache: async (req, res) => {
         const cleApi = req.headers['cle_api']; 
+        const userId = req.params.Id;
     
         try {
           
@@ -134,7 +136,7 @@ afficherDetail: async (req, res) => {
 
     supprimerTache: async (req, res) => {
         const cleApi = req.headers['cle_api']; 
-    
+        const userId = req.params.Id;
         try {
          
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
@@ -152,6 +154,7 @@ afficherDetail: async (req, res) => {
     },
     ajouterSousTache: async (req, res) => {
         const cleApi = req.headers['cle_api']; 
+        const userId = req.params.Id;
         try {
          
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
@@ -170,6 +173,7 @@ afficherDetail: async (req, res) => {
     
     modifierSousTache: async (req, res) => {
         const cleApi = req.headers['cle_api']; 
+        const userId = req.params.Id;
         try {
           
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
@@ -188,6 +192,7 @@ afficherDetail: async (req, res) => {
     
     supprimerSousTache: async (req, res) => {
         const cleApi = req.headers['cle_api']; 
+        const userId = req.params.Id;
         try {
        
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
