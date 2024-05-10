@@ -67,8 +67,7 @@ const mod = {
         return new Promise((resolve, reject) => {
             const query = `
                 INSERT INTO public.taches (utilisateur_id, titre, description, date_debut, date_echeance, complete)
-                VALUES ($1, $2, $3, $4, $5, 0)
-                RETURNING *;
+                VALUES ($1, $2, $3, $4, $5, 0);
                 
             `;
             const values = [utilisateurId, titre, description, dateDebut, dateEcheance];
@@ -86,8 +85,7 @@ const mod = {
             const query = `
                 UPDATE public.taches 
                 SET titre = $2, description = $3, date_debut = $4, date_echeance = $5
-                WHERE id = $1
-                RETURNING *;
+                WHERE id = $1;
             `;
             const values = [tacheId, titre, description, dateDebut, dateEcheance];
             db.query(query, values, (err, result) => {
@@ -119,12 +117,12 @@ const mod = {
         return new Promise((resolve, reject) => {
             const query = `
                 INSERT INTO public.sous_taches (tache_id, titre, complete)
-                VALUES ($1, $2, $3)
-                RETURNING *;
+                VALUES ($1, $2, $3);
             `;
             const values = [tacheId, titre, complete];
             db.query(query, values, (err, result) => {
                 if (err) {
+                    console.log("erreur dans model");
                     reject(err);
                 } else {
                     resolve(result.rows[0]);
@@ -138,8 +136,7 @@ const mod = {
             const query = `
                 UPDATE public.sous_taches 
                 SET titre = $2, complete = $3
-                WHERE id = $1
-                RETURNING *;
+                WHERE id = $1;
             `;
             const values = [sousTacheId, titre, complete];
             db.query(query, values, (err, result) => {
@@ -156,8 +153,7 @@ const mod = {
         return new Promise((resolve, reject) => {
             const query = `
                 DELETE FROM public.sous_taches
-                WHERE id = $1
-                RETURNING *;
+                WHERE id = $1;
             `;
             const values = [sousTacheId];
             db.query(query, values, (err, result) => {
@@ -182,8 +178,7 @@ const mod = {
             hashedPassword = hashedPassword.substring(0,30);
             const query = `
                 INSERT INTO public.utilisateur (courriel, cle_api, password)
-                VALUES ($1, $2, $3)
-                RETURNING *;
+                VALUES ($1, $2, $3);
             `;
             const values = [courriel, cle_api, hashedPassword];
             const result = db.query(query, values);
@@ -201,8 +196,7 @@ const mod = {
             const query = `
                 UPDATE public.utilisateur 
                 SET cle_api = $1
-                WHERE id = $2
-                RETURNING *;
+                WHERE id = $2;
             `;
             const values = [newCleApi, userId];
             const result = await db.query(query, values);
