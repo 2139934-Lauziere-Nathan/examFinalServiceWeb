@@ -5,28 +5,32 @@ const controller = require('../controlleur/controlleur.js');
 
 //creation de la route pour tout afficher
 router.get('/tous/:id', controller.getAll);
+
+//route pour afficher les detail a propos d'une route par son id
 router.get('/taskDetails/:userId/:taskId', controller.afficherDetail);
 
-// Route for adding a task
-router.post('/addTask', controller.ajouterTache);
+// Route pour ajouter une tache 
+router.post('/addTask:userId/', controller.ajouterTache);
 
-// Route for modifying a task
-router.put('/updateTask/:tacheId', controller.modifierTache);
+// Route pour modifier une tache
+router.put('/updateTask/:userId/:tacheId', controller.modifierTache);
 
-// Route for deleting a task
-router.delete('/deleteTask/:tacheId', controller.supprimerTache);
+// Route pour supprimer une tache
+router.delete('/deleteTask/:userId/:tacheId', controller.supprimerTache);
 
-// Route for adding a sub-task
-router.post('/tasks/:tacheId/subtasks', controller.ajouterSousTache);
+// Route pour ajouter une sous tache
+router.post('/tasks/:userId/:tacheId/subtasks', controller.ajouterSousTache);
 
-// Route for modifying a sub-task
-router.put('/tasks/subtasks/:sousTacheId', controller.modifierSousTache);
+// Route pour metre a jour une sous tache
+router.put('/tasks/subtasks/:userId/:sousTacheId', controller.modifierSousTache);
 
-// Route for deleting a sub-task
-router.delete('/tasks/subtasks/:sousTacheId', controller.supprimerSousTache);
+// Route pour supprimer une sous-tache
+router.delete('/tasks/subtasks/:userId/:sousTacheId', controller.supprimerSousTache);
 
+// Route pour ajouter une utilisateur avec uniquement un email et un password
 router.post('/users', controller.createUser);
 
+//route pour metre a jour la cle api
 router.put('/users/:userId/updateCle', controller.updateUser);
 
 module.exports = router;

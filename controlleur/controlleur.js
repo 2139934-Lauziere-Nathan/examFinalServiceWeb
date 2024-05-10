@@ -18,7 +18,7 @@ const controlleur = {
             console.log(courriel);
             console.log(password);
             console.error("Error creating user:", error);
-            res.status(500).json({ error: "An error occurred while creating the user." });
+            res.status(500).json({ error: "erreur lors de la creation de l'utilisateur" });
         }
     },
     
@@ -29,7 +29,7 @@ const controlleur = {
         const isValidPassword = await model.verifyCode(userId, password);
         
         if (!isValidPassword) {
-            return res.status(401).json({ error: 'Unauthorized: Invalid password' });
+            return res.status(401).json({ error: 'mot de passe invalide' });
         }
         
       
@@ -37,19 +37,19 @@ const controlleur = {
 
         res.status(200).json({
             success: true,
-            message: 'User API key updated successfully',
+            message: 'cle api mis a jours',
             user: updatedUser
         });
     } catch (error) {
-        console.error('Error updating user API key:', error);
+        console.error('erreur lors de la mise a jour:', error);
         res.status(500).json({
             success: false,
-            message: 'Failed to update user API key'
+            message: 'echec de la mise a jour'
         });
     }
 },
 getAll: async (req, res) => {
-    console.log("controlleur pass");
+   
     const userId = req.params.id;
     const cleApi = req.headers['cle_api'];
     
@@ -58,7 +58,7 @@ getAll: async (req, res) => {
         const isCleApiValid = await model.verifyCleApi(userId, cleApi);
         
         if (!isCleApiValid) {
-            return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            return res.status(401).json({ error: 'cle api non autoriser' });
         }
         
       
@@ -84,15 +84,15 @@ afficherDetail: async (req, res) => {
         console.log(Id);
         console.log(cleApi);
         if (!isCleApiValid) {
-            return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+            return res.status(401).json({ error: 'cle api non autoriser' });
         }
         const taskId  = req.params.taskId;
         console.log(taskId);
         const taskDetails = await model.afficherDetail(taskId);
         res.json(taskDetails);
     } catch (error) {
-        console.error("Error fetching task details:", error);
-        res.status(500).json({ error: "Error fetching task details" });
+        console.error("erreur a la recuperation des detail:", error);
+        res.status(500).json({ error: "erreur a la recuperation des detail" });
     }
 },
     ajouterTache: async (req, res) => {
@@ -102,14 +102,14 @@ afficherDetail: async (req, res) => {
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
-                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+                return res.status(401).json({ error: 'cle api non autoriser' });
             }
             const { utilisateurId, titre, description, dateDebut, dateEcheance } = req.body;
             const newTask = await model.ajouterTache(utilisateurId, titre, description, dateDebut, dateEcheance);
             res.status(201).json(newTask);
         } catch (error) {
-            console.error("Error adding task:", error);
-            res.status(500).json({ error: "Error adding task" });
+            console.error("erreur a l'ajout de la tache:", error);
+            res.status(500).json({ error: "erreur a l'ajout de la tache" });
         }
     },
 
@@ -121,14 +121,14 @@ afficherDetail: async (req, res) => {
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
-                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+                return res.status(401).json({ error: 'cle api non autoriser' });
             }
             const { tacheId, titre, description, dateDebut, dateEcheance } = req.body;
             const modifiedTask = await model.modifierTache(tacheId, titre, description, dateDebut, dateEcheance);
             res.json(modifiedTask);
         } catch (error) {
-            console.error("Error modifying task:", error);
-            res.status(500).json({ error: "Error modifying task" });
+            console.error("erreur a la modification de la tache:", error);
+            res.status(500).json({ error: "erreur a la modification de la tache" });
         }
     },
 
@@ -140,14 +140,14 @@ afficherDetail: async (req, res) => {
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
-                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+                return res.status(401).json({ error: 'cle api non autoriser' });
             }
             const { tacheId } = req.params;
             const deletedTask = await model.supprimerTache(tacheId);
             res.json(deletedTask);
         } catch (error) {
-            console.error("Error deleting task:", error);
-            res.status(500).json({ error: "Error deleting task" });
+            console.error("erreur a la suppression de la tache:", error);
+            res.status(500).json({ error: "erreur a la suppression de la tache" });
         }
     },
     ajouterSousTache: async (req, res) => {
@@ -157,14 +157,14 @@ afficherDetail: async (req, res) => {
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
-                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+                return res.status(401).json({ error: 'cle api non autoriser' });
             }
             const { tacheId, titre, complete } = req.body;
             const newSubTask = await model.ajouterSousTache(tacheId, titre, complete);
             res.status(201).json(newSubTask);
         } catch (error) {
-            console.error("Error adding sub-task:", error);
-            res.status(500).json({ error: "Error adding sub-task" });
+            console.error("erreur a l'ajout de la sous-tache:", error);
+            res.status(500).json({ error: "erreur a l'ajout de la sous-tache" });
         }
     },
     
@@ -175,14 +175,14 @@ afficherDetail: async (req, res) => {
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
-                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+                return res.status(401).json({ error: 'cle api non autoriser' });
             }
             const { sousTacheId, titre, complete } = req.body;
             const modifiedSubTask = await model.modifierSousTache(sousTacheId, titre, complete);
             res.json(modifiedSubTask);
         } catch (error) {
-            console.error("Error modifying sub-task:", error);
-            res.status(500).json({ error: "Error modifying sub-task" });
+            console.error("erreur a la modification de la sous tache:", error);
+            res.status(500).json({ error: "erreur a la modification de la sous tache" });
         }
     },
     
@@ -193,14 +193,14 @@ afficherDetail: async (req, res) => {
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
-                return res.status(401).json({ error: 'Unauthorized: Invalid cle_api' });
+                return res.status(401).json({ error: 'cle api non autoriser' });
             }
             const { sousTacheId } = req.params;
             const deletedSubTask = await model.supprimerSousTache(sousTacheId);
             res.json(deletedSubTask);
         } catch (error) {
-            console.error("Error deleting sub-task:", error);
-            res.status(500).json({ error: "Error deleting sub-task" });
+            console.error("erreur a la suppression de la sous-tache:", error);
+            res.status(500).json({ error: "erreur a la suppression de la sous-tache" });
         }
     }
 };

@@ -11,7 +11,7 @@ const mod = {
                 if (err) {
                     reject(err);
                 } else {
-                    console.log("resolve");
+                    
                     resolve(result.rows);
                 }
             });
