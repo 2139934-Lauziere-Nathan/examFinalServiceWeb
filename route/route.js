@@ -19,7 +19,7 @@ router.put('/updateTask/:userId/:tacheId', controller.modifierTache);
 router.delete('/deleteTask/:userId/:tacheId', controller.supprimerTache);
 
 // Route pour ajouter une sous tache
-router.post('/tasks/:userId/:tacheId/subtasks', controller.ajouterSousTache);
+router.post('/tasks/subtasks/:userId/:tacheId', controller.ajouterSousTache);
 
 // Route pour metre a jour une sous tache
 router.put('/tasks/subtasks/:userId/:sousTacheId', controller.modifierSousTache);
