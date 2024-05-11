@@ -197,7 +197,7 @@ const mod = {
             LIMIT 1;
             `
             const result = db.query(query);
-            const lastInsertedId = result.rows.id;
+            const lastInsertedId = result.row;
             return lastInsertedId;
         } catch (error) {
             throw error;
