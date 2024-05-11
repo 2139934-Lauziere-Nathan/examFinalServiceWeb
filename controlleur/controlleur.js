@@ -12,8 +12,8 @@ const controlleur = {
             console.log(password);
             const newUser = await model.createUser(courriel, password );
             const retour = await model.getLastUser();
-            //console.log(retour);
-            res.status(201).json(newUser, retour);
+            console.log(retour);
+            res.status(201).json(newUser);
         } catch (error) {
 
             console.error("Error creating user:", error);
