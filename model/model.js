@@ -196,7 +196,7 @@ const mod = {
             ORDER BY id DESC
             LIMIT 1;
             `
-            const result = db.query(query);
+            const result = await db.query(query);
             const lastInsertedId = result.rows[0]['id'];
             return lastInsertedId;
         } catch (error) {
