@@ -196,7 +196,7 @@ const mod = {
             ORDER BY id DESC
             LIMIT 1;
             `
-            const result = db.query();
+            const result = db.query(query);
             return result;
         } catch (error) {
             throw error;
