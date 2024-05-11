@@ -244,7 +244,12 @@ const mod = {
             `;
             const values = [userId, hashedPassword];
             const result = await db.query(query, values);
-            return result.rows.length > 0; 
+            console.log(result);
+            if (result.rows.length > 0){
+                 return 0;
+            }
+             else return 1;  
+            
         } catch (error) {
             throw error;
         }
