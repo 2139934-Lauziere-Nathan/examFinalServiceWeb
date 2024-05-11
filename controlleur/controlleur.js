@@ -15,8 +15,7 @@ const controlleur = {
             console.log(retour);
             res.status(201).json(newUser, retour);
         } catch (error) {
-            console.log(courriel);
-            console.log(password);
+
             console.error("Error creating user:", error);
             res.status(500).json({ error: "erreur lors de la creation de l'utilisateur" });
         }
