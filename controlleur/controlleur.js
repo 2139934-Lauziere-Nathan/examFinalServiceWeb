@@ -40,6 +40,7 @@ const controlleur = {
         res.status(200).json({
             success: true,
             message: 'cle api mis a jours',
+            test: "test",
             user: updatedUser
         });
     } catch (error) {

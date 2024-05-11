@@ -216,6 +216,7 @@ const mod = {
             `;
             const values = [newCleApi, userId];
             const result = await db.query(query, values);
+            console.log(newCleApi);
             return newCleApi;
         } catch (error) {
             throw error;
