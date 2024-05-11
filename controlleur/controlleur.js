@@ -25,7 +25,9 @@ const controlleur = {
     try {
         const userId = req.params.userId; 
         console.log(userId);
+       
         const password = req.headers['password'];
+        console.log(password);
         const isValidPassword = await model.verifyCode(userId, password);
         
         if (!isValidPassword) {
