@@ -178,16 +178,31 @@ const mod = {
             hashedPassword = hashedPassword.substring(0,30);
             const query = `
                 INSERT INTO public.utilisateur (courriel, cle_api, password)
-                VALUES ($1, $2, $3);
+                VALUES ($1, $2, $3)
+                RETURNING * ;
             `;
             const values = [courriel, cle_api, hashedPassword];
-            const result = db.query(query, values);
+            const result = db.query(query, values);   
             console.log(values[0],values[1],values[2]);
             return result.cle_api; 
         } catch (error) {
             throw error;
         }
     },
+    getLastUser: async () => {
+        try{
+            const query = `SELECT *
+            FROM public.utilisateur
+            ORDER BY id DESC
+            LIMIT 1;
+            `
+            const result = db.query();
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
+    ,
     updateUser: async (userId) => {
         try {
             let newCleApi = uuidv4.v4();
