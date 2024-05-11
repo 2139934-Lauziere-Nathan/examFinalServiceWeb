@@ -191,13 +191,13 @@ const mod = {
     },
     getLastUser: async () => {
         try{
-            const query = `SELECT *
+            const query = `SELECT id
             FROM public.utilisateur
             ORDER BY id DESC
             LIMIT 1;
             `
             const result = db.query(query);
-            return result.row[0];
+            return result.id;
         } catch (error) {
             throw error;
         }
@@ -215,7 +215,7 @@ const mod = {
             `;
             const values = [newCleApi, userId];
             const result = await db.query(query, values);
-            return result.id;
+            return result.rows[0];
         } catch (error) {
             throw error;
         }
