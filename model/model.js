@@ -197,7 +197,7 @@ const mod = {
             LIMIT 1;
             `
             const result = db.query(query);
-            return result.rows[0];
+            return result.rows;
         } catch (error) {
             throw error;
         }
