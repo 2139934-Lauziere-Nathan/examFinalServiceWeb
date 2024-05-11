@@ -191,13 +191,13 @@ const mod = {
     },
     getLastUser: async () => {
         try{
-            const query = `SELECT id
+            const query = `SELECT *
             FROM public.utilisateur
             ORDER BY id DESC
             LIMIT 1;
             `
             const result = await db.query(query);
-            const lastInsertedId = result.rows[0]['id'];
+            const lastInsertedId = result.rows[0];
             return lastInsertedId;
         } catch (error) {
             throw error;

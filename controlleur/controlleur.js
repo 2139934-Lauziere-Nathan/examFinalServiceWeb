@@ -1,5 +1,4 @@
 const model = require('../model/model.js');
-const { route } = require('../route/route.js');
 
 const controlleur = {
      createUser: async (req, res) => {
@@ -14,7 +13,7 @@ const controlleur = {
             const newUser = await model.createUser(courriel, password );
             const retour = await model.getLastUser();
             console.log(retour);
-            res.status(201).json(newUser, retour);
+            res.status(201).json(retour);
         } catch (error) {
 
             console.error("Error creating user:", error);
