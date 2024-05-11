@@ -23,10 +23,10 @@ const controlleur = {
     
  updateUser: async (req, res) => {
     try {
-        const userId = req.params.userId; 
+        const userId = req.body.userId; 
         console.log(userId);
        
-        const password = req.headers['password'];
+        const password = req.body.password;
         console.log(password);
         const isValidPassword = await model.verifyCode(userId, password);
         

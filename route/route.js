@@ -31,6 +31,6 @@ router.delete('/tasks/subtasks/:userId', controller.supprimerSousTache);
 router.post('/users', controller.createUser);
 
 //route pour metre a jour la cle api
-router.put('/users/updateCle/:userId', controller.updateUser);
+router.put('/users/updateCle', controller.updateUser);
 
 module.exports = router;
