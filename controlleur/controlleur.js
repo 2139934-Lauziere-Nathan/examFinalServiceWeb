@@ -24,6 +24,7 @@ const controlleur = {
  updateUser: async (req, res) => {
     try {
         const userId = req.params.userId; 
+        console.log(userId);
         const password = req.headers['password'];
         const isValidPassword = await model.verifyCode(userId, password);
         
