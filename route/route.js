@@ -25,7 +25,7 @@ router.post('/tasks/subtasks/:userId', controller.ajouterSousTache);
 router.put('/tasks/subtasks/:userId', controller.modifierSousTache);
 
 // Route pour supprimer une sous-tache
-router.delete('/tasks/subtasks/:userId', controller.supprimerSousTache);
+router.delete('/tasks/subtasks', controller.supprimerSousTache);
 
 // Route pour ajouter une utilisateur avec uniquement un email et un password
 router.post('/users', controller.createUser);

@@ -107,12 +107,12 @@ afficherDetail: async (req, res) => {
             if (!isCleApiValid) {
                 return res.status(401).json({ error: 'cle api non autoriser' });
             }
-            const utilisateurId = req.body.userId;
+            
             const titre = req.body.titre;
             const description = req.body.description;
             const dateDebut = req.body.dateDebut;
             const dateEcheance = req.body.dateEcheance;           
-         const newTask = await model.ajouterTache(utilisateurId, titre, description, dateDebut, dateEcheance);
+         const newTask = await model.ajouterTache(userId, titre, description, dateDebut, dateEcheance);
             res.status(201).json(newTask);
         } catch (error) {
             console.error("erreur a l'ajout de la tache:", error);
@@ -200,7 +200,7 @@ afficherDetail: async (req, res) => {
     
     supprimerSousTache: async (req, res) => {
         const cleApi = req.headers['cle_api']; 
-        const userId = req.params.userId;
+        const userId = req.body.userId;
         try {
        
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
@@ -208,7 +208,7 @@ afficherDetail: async (req, res) => {
             if (!isCleApiValid) {
                 return res.status(401).json({ error: 'cle api non autoriser' });
             }
-            const { sousTacheId } = req.body;
+            const { sousTacheId } = req.body.userId;
             const deletedSubTask = await model.supprimerSousTache(sousTacheId);
             res.json(deletedSubTask);
         } catch (error) {
