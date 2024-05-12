@@ -73,10 +73,14 @@ const mod = {
             `;
             const values = [utilisateurId, titre, description, dateDebut, dateEcheance];
             db.query(query, values, (err, result) => {
+                const retour = {
+                    titre: result.titre
+                }
+                console.log(retour);
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(result);
+                    resolve(retour);
                 }
             });
         });
