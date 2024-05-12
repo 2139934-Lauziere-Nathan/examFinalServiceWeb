@@ -167,7 +167,7 @@ afficherDetail: async (req, res) => {
             const { tacheId, titre, complete } = req.body;
            
             const newSubTask = await model.ajouterSousTache(tacheId, titre, complete);
-            res.status(201).json(newSubTask);
+            res.status(201).json({message : newSubTask});
         } catch (error) {
             console.error("erreur a l'ajout de la sous-tache:", error);
             res.status(500).json({ error: "erreur a l'ajout de la sous-tache" });
