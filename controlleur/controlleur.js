@@ -99,7 +99,7 @@ afficherDetail: async (req, res) => {
 },
     ajouterTache: async (req, res) => {
         const cleApi = req.headers['cle_api'];
-        const userId = req.params.userId;
+        const userId = req.body.userId;
         try {
          
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
