@@ -76,7 +76,7 @@ const mod = {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(result.rows[0]);
+                    resolve(result);
                 }
             });
         });
