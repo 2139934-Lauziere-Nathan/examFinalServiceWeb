@@ -107,8 +107,12 @@ afficherDetail: async (req, res) => {
             if (!isCleApiValid) {
                 return res.status(401).json({ error: 'cle api non autoriser' });
             }
-            const { utilisateurId, titre, description, dateDebut, dateEcheance } = req.body;
-            const newTask = await model.ajouterTache(utilisateurId, titre, description, dateDebut, dateEcheance);
+            const utilisateurId = req.body.userId;
+            const titre = req.body.titre;
+            const description = req.body.description;
+            const dateDebut = req.body.dateDebut;
+            const dateEcheance = req.body.dateEcheance;           
+         const newTask = await model.ajouterTache(utilisateurId, titre, description, dateDebut, dateEcheance);
             res.status(201).json({message : newTask});
         } catch (error) {
             console.error("erreur a l'ajout de la tache:", error);
