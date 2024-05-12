@@ -74,7 +74,7 @@ const mod = {
             const values = [utilisateurId, titre, description, dateDebut, dateEcheance];
             db.query(query, values, (err, result) => {
                 const retour = {
-                    titre: result.titre
+                    titre: result.rows[0].titre
                 }
                 console.log(retour);
                 if (err) {
