@@ -109,7 +109,7 @@ afficherDetail: async (req, res) => {
             }
             const { utilisateurId, titre, description, dateDebut, dateEcheance } = req.body;
             const newTask = await model.ajouterTache(utilisateurId, titre, description, dateDebut, dateEcheance);
-            res.status(201).json(newTask);
+            res.status(201).json({message : newTask});
         } catch (error) {
             console.error("erreur a l'ajout de la tache:", error);
             res.status(500).json({ error: "erreur a l'ajout de la tache" });
@@ -129,7 +129,7 @@ afficherDetail: async (req, res) => {
             }
             const { tacheId, titre, description, dateDebut, dateEcheance } = req.body;
             const modifiedTask = await model.modifierTache(tacheId, titre, description, dateDebut, dateEcheance);
-            res.json(modifiedTask);
+            res.json({message : modifiedTask});
         } catch (error) {
             console.error("erreur a la modification de la tache:", error);
             res.status(500).json({ error: "erreur a la modification de la tache" });
