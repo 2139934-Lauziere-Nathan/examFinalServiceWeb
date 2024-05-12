@@ -113,7 +113,7 @@ afficherDetail: async (req, res) => {
             const dateDebut = req.body.dateDebut;
             const dateEcheance = req.body.dateEcheance;           
          const newTask = await model.ajouterTache(utilisateurId, titre, description, dateDebut, dateEcheance);
-            res.status(201).json({message : newTask.titre});
+            res.status(201).json(newTask);
         } catch (error) {
             console.error("erreur a l'ajout de la tache:", error);
             res.status(500).json({ error: "erreur a l'ajout de la tache" });
