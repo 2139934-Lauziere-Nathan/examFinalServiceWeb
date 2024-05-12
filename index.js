@@ -9,7 +9,7 @@ const cors = require('cors');
 app.use(cors());
 
 app.use(express.json());
-
+app.use(express.static(path.join(__dirname, 'public')));
 //route de base pour le reste des route
 app.use('/api/exam', require('./route/route'));
 
