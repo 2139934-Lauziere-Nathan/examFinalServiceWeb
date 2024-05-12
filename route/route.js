@@ -10,7 +10,7 @@ router.get('/tous/:userId', controller.getAll);
 router.get('/taskDetails/:userId/:taskId', controller.afficherDetail);
 
 // Route pour ajouter une tache 
-router.post('/addTask/:userId', controller.ajouterTache);
+router.post('/addTask', controller.ajouterTache);
 
 // Route pour modifier une tache
 router.put('/updateTask/:userId/:tacheId', controller.modifierTache);
