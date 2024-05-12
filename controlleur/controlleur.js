@@ -150,7 +150,7 @@ afficherDetail: async (req, res) => {
             if (!isCleApiValid) {
                 return res.status(401).json({ error: 'cle api non autoriser' });
             }
-            const { tacheId } = req.body.tacheId;
+            const { tacheId } = req.body;
             const deletedTask = await model.supprimerTache(tacheId);
             res.json(deletedTask);
         } catch (error) {
