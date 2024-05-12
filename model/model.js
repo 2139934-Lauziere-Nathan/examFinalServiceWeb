@@ -67,7 +67,8 @@ const mod = {
         return new Promise((resolve, reject) => {
             const query = `
                 INSERT INTO public.taches (utilisateur_id, titre, description, date_debut, date_echeance, complete)
-                VALUES ($1, $2, $3, $4, $5, 0);
+                VALUES ($1, $2, $3, $4, $5, 0)
+                RETURNING *;
                 
             `;
             const values = [utilisateurId, titre, description, dateDebut, dateEcheance];
@@ -117,7 +118,8 @@ const mod = {
         return new Promise((resolve, reject) => {
             const query = `
                 INSERT INTO public.sous_taches (tache_id, titre, complete)
-                VALUES ($1, $2, $3);
+                VALUES ($1, $2, $3)
+                ;
             `;
             const values = [tacheId, titre, complete];
             db.query(query, values, (err, result) => {
