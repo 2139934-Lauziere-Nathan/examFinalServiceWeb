@@ -162,13 +162,20 @@ afficherDetail: async (req, res) => {
         const cleApi = req.headers['cle_api']; 
         const userId = req.params.userId;
         try {
-         
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
             
             if (!isCleApiValid) {
                 return res.status(401).json({ error: 'cle api non autoriser' });
             }
+    
             const tacheId = req.params.tacheId;
+            
+          
+            const existingTask = await model.getTaskById(tacheId);
+            if (!existingTask) {
+                return res.status(404).json({ error: 'Tache non trouvee' });
+            }
+    
             const { titre, complete } = req.body;
            
             const newSubTask = await model.ajouterSousTache(tacheId, titre, complete);
