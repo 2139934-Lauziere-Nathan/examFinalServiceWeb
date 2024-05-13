@@ -4,10 +4,10 @@ const app = express();
 const PORT = 3001;
 const morgan = require('morgan')
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./src/config/documentation.json');
+const swaggerDocument = require('./src/documentation.json');
 const swaggerOptions = {
     customCss: '.swagger-ui .topbar { display: none }',
-    customSiteTitle: "Demo API"
+    customSiteTitle: "docs api"
 };
 app.use(morgan('dev')); 
 
