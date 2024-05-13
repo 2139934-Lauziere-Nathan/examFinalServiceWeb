@@ -117,6 +117,8 @@ const mod = {
         });
     },
     ajouterSousTache: (tacheId, titre, complete) => {
+        console.log(tacheId);
+        console.log(titre);
         return new Promise((resolve, reject) => {
             const query = `
                 INSERT INTO public.sous_taches (tache_id, titre, complete)

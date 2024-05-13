@@ -159,6 +159,7 @@ afficherDetail: async (req, res) => {
         }
     },
     ajouterSousTache: async (req, res) => {
+        console.log("controlleur");
         const cleApi = req.headers['cle_api']; 
         const userId = req.params.userId;
         try {
