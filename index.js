@@ -3,7 +3,12 @@ const path = require('path');
 const app = express();
 const PORT = 3001;
 const morgan = require('morgan')
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./src/config/documentation.json');
+const swaggerOptions = {
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: "Demo API"
+};
 app.use(morgan('dev')); 
 
 // Dans votre fichier de démarrage
@@ -16,7 +21,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 //route de base pour le reste des route
 app.use('/api/exam', require('./route/route'));
-
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
 //garde le serveur ouvert
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur le port ${PORT}`);

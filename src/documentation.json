@@ -1,0 +1,178 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Task Management API",
+      "description": "API documentation for managing tasks",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api/exam"
+      }
+    ],
+    "paths": {
+      "/tous/{userId}": {
+        "get": {
+          "summary": "Get all tasks for a user",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the user"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A list of tasks for the user"
+            }
+          }
+        }
+      },
+      "/taskDetails/{userId}/{taskId}": {
+        "get": {
+          "summary": "Get details of a specific task",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the user"
+            },
+            {
+              "in": "path",
+              "name": "taskId",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the task"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Details of the task"
+            }
+          }
+        }
+      },
+      "/addTask": {
+        "post": {
+          "summary": "Add a new task",
+          "responses": {
+            "201": {
+              "description": "Task added successfully"
+            }
+          }
+        }
+      },
+      "/updateTask/{userId}/{tacheId}": {
+        "put": {
+          "summary": "Update a task",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the user"
+            },
+            {
+              "in": "path",
+              "name": "tacheId",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the task"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Task updated successfully"
+            }
+          }
+        }
+      },
+      "/deleteTask/{userId}": {
+        "delete": {
+          "summary": "Delete a task",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "ID of the user"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Task deleted successfully"
+            }
+          }
+        }
+      },
+      "/tasks/addsubtasks/{userId}/{tacheId}": {
+        "post": {
+          "summary": "Add a subtask to a task",
+          "responses": {
+            "201": {
+              "description": "Subtask added successfully"
+            }
+          }
+        }
+      },
+      "/tasks/modsubtasks/{userId}": {
+        "put": {
+          "summary": "Modify a subtask",
+          "responses": {
+            "200": {
+              "description": "Subtask modified successfully"
+            }
+          }
+        }
+      },
+      "/tasks/delsubtasks/{userId}": {
+        "delete": {
+          "summary": "Delete a subtask",
+          "responses": {
+            "200": {
+              "description": "Subtask deleted successfully"
+            }
+          }
+        }
+      },
+      "/users": {
+        "post": {
+          "summary": "Create a new user",
+          "responses": {
+            "201": {
+              "description": "User created successfully"
+            }
+          }
+        }
+      },
+      "/users/updateCle": {
+        "put": {
+          "summary": "Update user's API key",
+          "responses": {
+            "200": {
+              "description": "API key updated successfully"
+            }
+          }
+        }
+      }
+    }
+  }
+  
