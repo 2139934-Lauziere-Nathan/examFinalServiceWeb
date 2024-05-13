@@ -100,6 +100,7 @@ afficherDetail: async (req, res) => {
     ajouterTache: async (req, res) => {
         const cleApi = req.headers['cle_api'];
         const userId = req.body.userId;
+        console.log("controlleur");
         try {
          
             const isCleApiValid = await model.verifyCleApi(userId, cleApi);
@@ -112,6 +113,7 @@ afficherDetail: async (req, res) => {
             const description = req.body.description;
             const dateDebut = req.body.dateDebut;
             const dateEcheance = req.body.dateEcheance;  
+
             console.log(titre);         
          const newTask = await model.ajouterTache(userId, titre, description, dateDebut, dateEcheance);
             res.status(201).json(newTask);
