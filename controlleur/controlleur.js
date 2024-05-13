@@ -111,7 +111,8 @@ afficherDetail: async (req, res) => {
             const titre = req.body.titre;
             const description = req.body.description;
             const dateDebut = req.body.dateDebut;
-            const dateEcheance = req.body.dateEcheance;           
+            const dateEcheance = req.body.dateEcheance;  
+            console.log(titre);         
          const newTask = await model.ajouterTache(userId, titre, description, dateDebut, dateEcheance);
             res.status(201).json(newTask);
         } catch (error) {
