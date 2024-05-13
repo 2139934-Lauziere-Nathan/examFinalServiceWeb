@@ -2,6 +2,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3001;
+const morgan = require('morgan')
+
+app.use(morgan('dev')); 
+
 // Dans votre fichier de démarrage
 const cors = require('cors');
 
