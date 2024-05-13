@@ -170,11 +170,6 @@ afficherDetail: async (req, res) => {
     
             const tacheId = req.params.tacheId;
             
-          
-            const existingTask = await model.getTaskById(tacheId);
-            if (!existingTask) {
-                return res.status(404).json({ error: 'Tache non trouvee' });
-            }
     
             const { titre, complete } = req.body;
            
