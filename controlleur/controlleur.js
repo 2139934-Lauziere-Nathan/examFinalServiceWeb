@@ -168,7 +168,8 @@ afficherDetail: async (req, res) => {
             if (!isCleApiValid) {
                 return res.status(401).json({ error: 'cle api non autoriser' });
             }
-            const { tacheId, titre, complete } = req.body;
+            const tacheId = req.params.tacheId;
+            const { titre, complete } = req.body;
            
             const newSubTask = await model.ajouterSousTache(tacheId, titre, complete);
             console.log(newSubTask.titre);
