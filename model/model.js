@@ -64,6 +64,7 @@ const mod = {
     },
 
     ajouterTache: (utilisateurId, titre, description, dateDebut, dateEcheance) => {
+        console.log("model");
         return new Promise((resolve, reject) => {
             const query = `
                 INSERT INTO public.taches (utilisateur_id, titre, description, date_debut, date_echeance, complete)
