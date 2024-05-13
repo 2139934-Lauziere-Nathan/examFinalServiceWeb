@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-      "title": "Task Management API",
-      "description": "API documentation for managing tasks",
+      "title": "api de management de tache",
+      "description": "api de documentation de tache",
       "version": "1.0.0"
     },
     "servers": [
@@ -13,7 +13,7 @@
     "paths": {
       "/tous/{userId}": {
         "get": {
-          "summary": "Get all tasks for a user",
+          "summary": "cherche toutes les taches d'un utilisateur",
           "parameters": [
             {
               "in": "path",
@@ -22,19 +22,19 @@
               "schema": {
                 "type": "string"
               },
-              "description": "ID of the user"
+              "description": "ID du user"
             }
           ],
           "responses": {
             "200": {
-              "description": "A list of tasks for the user"
+              "description": "une liste des taches"
             }
           }
         }
       },
       "/taskDetails/{userId}/{taskId}": {
         "get": {
-          "summary": "Get details of a specific task",
+          "summary": "recupere une taches et ses information",
           "parameters": [
             {
               "in": "path",
@@ -43,7 +43,7 @@
               "schema": {
                 "type": "string"
               },
-              "description": "ID of the user"
+              "description": "ID du user"
             },
             {
               "in": "path",
@@ -52,29 +52,29 @@
               "schema": {
                 "type": "string"
               },
-              "description": "ID of the task"
+              "description": "ID de la tache"
             }
           ],
           "responses": {
             "200": {
-              "description": "Details of the task"
+              "description": "details de la tache"
             }
           }
         }
       },
       "/addTask": {
         "post": {
-          "summary": "Add a new task",
+          "summary": "ajouter une nouvelle tache",
           "responses": {
             "201": {
-              "description": "Task added successfully"
+              "description": "tache ajouter avec success"
             }
           }
         }
       },
       "/updateTask/{userId}/{tacheId}": {
         "put": {
-          "summary": "Update a task",
+          "summary": "metre a jour une tache",
           "parameters": [
             {
               "in": "path",
@@ -83,7 +83,7 @@
               "schema": {
                 "type": "string"
               },
-              "description": "ID of the user"
+              "description": "ID de l'utilisateur"
             },
             {
               "in": "path",
@@ -92,19 +92,19 @@
               "schema": {
                 "type": "string"
               },
-              "description": "ID of the task"
+              "description": "ID de la tache"
             }
           ],
           "responses": {
             "200": {
-              "description": "Task updated successfully"
+              "description": "tache mis a jour avec success"
             }
           }
         }
       },
       "/deleteTask/{userId}": {
         "delete": {
-          "summary": "Delete a task",
+          "summary": "supprimer tache",
           "parameters": [
             {
               "in": "path",
@@ -113,62 +113,62 @@
               "schema": {
                 "type": "string"
               },
-              "description": "ID of the user"
+              "description": "ID de l'utilisateur"
             }
           ],
           "responses": {
             "200": {
-              "description": "Task deleted successfully"
+              "description": "tahce supprimer avec success"
             }
           }
         }
       },
       "/tasks/addsubtasks/{userId}/{tacheId}": {
         "post": {
-          "summary": "Add a subtask to a task",
+          "summary": "ajouter une sous tache",
           "responses": {
             "201": {
-              "description": "Subtask added successfully"
+              "description": "sous tache ajouter avec success"
             }
           }
         }
       },
       "/tasks/modsubtasks/{userId}": {
         "put": {
-          "summary": "Modify a subtask",
+          "summary": "modifier une sous tache",
           "responses": {
             "200": {
-              "description": "Subtask modified successfully"
+              "description": "sous tache modifier avec sucess"
             }
           }
         }
       },
       "/tasks/delsubtasks/{userId}": {
         "delete": {
-          "summary": "Delete a subtask",
+          "summary": "supprimer une sous tache",
           "responses": {
             "200": {
-              "description": "Subtask deleted successfully"
+              "description": "sous tache supprimer avec success"
             }
           }
         }
       },
       "/users": {
         "post": {
-          "summary": "Create a new user",
+          "summary": "cree nouvelle utilisateur",
           "responses": {
             "201": {
-              "description": "User created successfully"
+              "description": "utilisateur cree avec success"
             }
           }
         }
       },
       "/users/updateCle": {
         "put": {
-          "summary": "Update user's API key",
+          "summary": "metre a jour une cle api",
           "responses": {
             "200": {
-              "description": "API key updated successfully"
+              "description": "mis a jour avec success"
             }
           }
         }
