@@ -19,13 +19,13 @@ router.put('/updateTask/:userId/:tacheId', controller.modifierTache);
 router.delete('/deleteTask/:userId', controller.supprimerTache);
 
 // Route pour ajouter une sous tache
-router.post('/tasks/subtasks/:userId/:tacheId', controller.ajouterSousTache);
+router.post('/tasks/addsubtasks/:userId/:tacheId', controller.ajouterSousTache);
 
 // Route pour metre a jour une sous tache
-router.put('/tasks/subtasks/:userId', controller.modifierSousTache);
+router.put('/tasks/modsubtasks/:userId', controller.modifierSousTache);
 
 // Route pour supprimer une sous-tache
-router.delete('/tasks/subtasks/:userId', controller.supprimerSousTache);
+router.delete('/tasks/delsubtasks/:userId', controller.supprimerSousTache);
 
 // Route pour ajouter une utilisateur avec uniquement un email et un password
 router.post('/users', controller.createUser);
