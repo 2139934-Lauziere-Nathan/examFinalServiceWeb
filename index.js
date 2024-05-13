@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+
 const app = express();
 const PORT = 3001;
 // Dans votre fichier de démarrage
@@ -9,7 +9,7 @@ const cors = require('cors');
 app.use(cors());
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+
 //route de base pour le reste des route
 app.use('/api/exam', require('./route/route'));
 
